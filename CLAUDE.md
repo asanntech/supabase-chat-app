@@ -1,0 +1,112 @@
+# CLAUDE.md
+
+このファイルは、Claude / Claude Code（claude.ai/code）がこのリポジトリで作業する際のガイドラインです。
+
+---
+
+## 1. このリポジトリの役割
+
+- Next.js（App Router）＋ TypeScript を用いた Web フロントエンド
+- バックエンドは Supabase（認証・DB・リアルタイム）を想定
+- 主なドメインは「簡易チャットアプリ（Supabase学習用）」
+
+---
+
+## 2. 使用するエージェント
+
+フロントエンドの設計・実装・リファクタリング・テストを行うときは、**必ず次のサブエージェントを利用**してください。
+
+- `.claude/agents/next-ddd-clean-frontend.md`
+  - 役割: Next.js App Router ＋ TypeScript ＋ DDD/Clean/FDD 構成のフロントエンド設計・実装・リファクタリング
+  - この CLAUDE.md の内容は、`next-ddd-clean-frontend` の「プロジェクト側の設定」として上書きされます。
+
+- `.claude/agents/vitest-testing-strategy.md`
+  - 役割: Vitestを使用したテスト戦略の策定・テストコードの実装
+  - DDD/クリーンアーキテクチャに適したテスト設計を提供
+
+- `.claude/agents/storybook-ui-catalog.md`
+  - 役割: StorybookによるUIコンポーネントカタログの構築
+  - 基本的なUIカタログとアクセシビリティチェックに集中
+
+Claude / Claude Code は、**フロントエンド関連の作業をする際に、以下を順番に確認してください：**
+
+1. リポジトリ直下の `CLAUDE.md`（このファイル）
+2. 既存のコード
+   - `src/app/`
+   - `src/features/`
+   - `src/infrastructure/`
+   - `src/shared/`
+3. 必要に応じて README やドキュメント
+
+---
+
+## 3. 技術スタック
+
+このプロジェクトで使用する技術スタックは次のとおりです。
+
+- フレームワーク: **Next.js App Router**
+- 言語: **TypeScript**
+- パッケージマネージャー: **pnpm**
+- UI / CSS:
+  - **shadcn/ui**
+  - Tailwind CSS
+- データフェッチ / 状態管理:
+  - **TanStack Query（@tanstack/react-query）**
+- テストフレームワーク:
+  - **Vitest**
+  - @testing-library/react
+  - @testing-library/jest-dom
+- UIカタログ:
+  - **Storybook** (Vite版)
+- バックエンド:
+  - Supabase（サーバー側・API 経由で利用）
+
+
+## 4. ローカル開発環境
+
+### Supabase ローカル環境
+
+このプロジェクトでは、開発時は**ローカルのSupabase環境を使用**します。以下の手順で環境を構築してください：
+
+1. **Supabase CLIのインストール**
+
+   ```bash
+   pnpm add supabase --save-dev --allow-build=supabase
+   ```
+
+2. **ローカルSupabaseの初期化**
+
+   ```bash
+   npx supabase init
+   ```
+
+3. **ローカルSupabaseの起動**
+
+   ```bash
+   npx supabase start
+   ```
+
+4. **データベースマイグレーション**
+   - テーブル作成やスキーマ変更は `supabase/migrations/` ディレクトリにマイグレーションファイルを作成
+   - マイグレーションの実行:
+     ```bash
+     npx supabase migration up
+     ```
+
+5. **環境変数の設定**
+   - `.env.local` に以下を設定:
+
+     ```
+     # クライアントサイド用（ブラウザから利用）
+     NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=<supabase start実行時に表示されるanon key>
+
+     # サーバーサイド用（Route Handlers, Server Actions, Server Components）
+     SUPABASE_SERVICE_ROLE_KEY=<supabase start実行時に表示されるservice_role key>
+     ```
+
+### 開発ルール
+
+- **テーブル作成・スキーマ変更は必ずマイグレーションファイルで管理**
+- Supabase Studio (http://localhost:54323) でのGUI操作による変更は避ける
+- 本番環境へのデプロイ時はマイグレーションファイルを使用
