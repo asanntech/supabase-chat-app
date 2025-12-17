@@ -19,7 +19,11 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/infrastructure/*": ["./src/infrastructure/*"],
+      "@/shared/*": ["./src/shared/*"],
+      "@/app/*": ["./src/app/*"]
     },
     "target": "ES2017"
   },
