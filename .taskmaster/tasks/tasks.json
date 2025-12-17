@@ -87,7 +87,7 @@
         "dependencies": [
           "1"
         ],
-        "status": "in-progress",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -146,13 +146,14 @@
             "dependencies": [
               2
             ],
-            "details": "1. Create migration: npx supabase migration new create_profile_on_signup\n2. Edit migration file with SQL:\n   - CREATE FUNCTION handle_new_user() that INSERTs into profiles using NEW.id, NEW.raw_user_meta_data->>'name' or NEW.email for username, and NEW.raw_user_meta_data->>'avatar_url'\n   - Function should be SECURITY DEFINER to bypass RLS\n   - CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users\n3. Apply migration: npx supabase migration up\n4. Create .env.local file:\n   NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321\n   NEXT_PUBLIC_SUPABASE_ANON_KEY=<from supabase status>\n   SUPABASE_SERVICE_ROLE_KEY=<from supabase status>\n5. Add .env.local to .gitignore if not already present\n6. Document in README or comments: Google OAuth setup requires configuring provider in Studio (http://localhost:54323) under Authentication > Providers\n\nExpected outcome: New auth users automatically get profile entries, environment variables ready for Next.js app",
-            "status": "pending",
+            "details": "1. Create migration: npx supabase migration new create_profile_on_signup\n2. Edit migration file with SQL:\n   - CREATE FUNCTION handle_new_user() that INSERTs into profiles using NEW.id, NEW.raw_user_meta_data->>'name' or NEW.email for username, and NEW.raw_user_meta_data->>'avatar_url'\n   - Function should be SECURITY DEFINER to bypass RLS\n   - CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users\n3. Apply migration: npx supabase migration up\n4. Create .env.local file:\n   NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321\n   NEXT_PUBLIC_SUPABASE_ANON_KEY=<from supabase status>\n   SUPABASE_SERVICE_ROLE_KEY=<from supabase status>\n5. Add .env.local to .gitignore if not already present\n6. Document in README or comments: Google OAuth setup requires configuring provider in Studio (http://localhost:54323) under Authentication > Providers\n\nExpected outcome: New auth users automatically get profile entries, environment variables ready for Next.js app\n<info added on 2025-12-17T15:37:30.211Z>\nImplementation completed with the following changes:\n\n**Migration File Created:**\n- File: `supabase/migrations/20251217153450_create_profile_on_signup.sql`\n- Function `handle_new_user()` implemented with SECURITY DEFINER to bypass RLS\n- Extracts username from `raw_user_meta_data->>'name'` or falls back to email\n- Extracts avatar_url from `raw_user_meta_data->>'avatar_url'`\n- Trigger `on_auth_user_created` configured to fire AFTER INSERT ON auth.users\n\n**Environment Configuration:**\n- `.env.local` file created with required variables:\n  - NEXT_PUBLIC_SUPABASE_URL: http://localhost:54321\n  - NEXT_PUBLIC_SUPABASE_ANON_KEY: (populated from supabase status)\n  - SUPABASE_SERVICE_ROLE_KEY: (populated from supabase status)\n- File confirmed in .gitignore to prevent credential exposure\n\n**Documentation Updated:**\n- README.md enhanced with comprehensive setup instructions:\n  - Local Supabase startup procedure\n  - Migration application steps\n  - Environment variable configuration guide\n  - Google OAuth provider setup instructions with Studio URL (http://localhost:54323)\n  - Authentication > Providers configuration steps\n\n**Verification:**\n- Migration successfully applied with `npx supabase migration up`\n- Trigger and function tested and confirmed operational\n- Auto-profile creation verified for new auth.users records\n</info added on 2025-12-17T15:37:30.211Z>",
+            "status": "done",
             "testStrategy": "Create test user via Studio Auth and verify profile is auto-created. Check .env.local exists and has correct values. Run 'npx supabase status' and compare keys match .env.local.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-17T15:37:02.352Z"
           }
         ],
-        "updatedAt": "2025-12-17T15:25:13.340Z"
+        "updatedAt": "2025-12-17T15:37:02.352Z"
       },
       {
         "id": 3,
@@ -447,13 +448,13 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-17T15:25:13.341Z",
+      "lastModified": "2025-12-17T15:37:02.352Z",
       "taskCount": 6,
-      "completedCount": 1,
+      "completedCount": 2,
       "tags": [
         "master"
       ],
-      "created": "2025-12-17T15:25:22.514Z",
+      "created": "2025-12-17T15:37:11.033Z",
       "description": "Tasks for master context"
     }
   }
