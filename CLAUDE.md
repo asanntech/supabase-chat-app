@@ -61,7 +61,6 @@ Claude / Claude Code は、**フロントエンド関連の作業をする際に
 - バックエンド:
   - Supabase（サーバー側・API 経由で利用）
 
-
 ## 4. ローカル開発環境
 
 ### Supabase ローカル環境
