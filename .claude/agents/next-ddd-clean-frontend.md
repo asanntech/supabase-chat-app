@@ -457,7 +457,11 @@ function Button({ className, ...props }: ButtonProps) {
 
 ### ● コードスタイル・フォーマット
 
-- プロジェクトに ESLint や Prettier が導入されている場合は、それらの設定に準拠してコーディングする。
+- **ESLintとPrettierの導入**：新しいプロジェクトでは以下を必ず設定する
+  - ESLint：コード品質とルールの統一
+  - Prettier：コードフォーマットの自動化
+  - これらの設定は Next.js 初期化時から標準で含まれることが多いが、未導入の場合は積極的に導入する
+- ESLint や Prettier が導入されている場合は、それらの設定に準拠してコーディングする。
 - `package.json` の scripts に `lint`, `format` 等が定義されていればその指定に従う。
 - 自動フォーマット機能がある場合は積極的に活用し、チーム内の一貫性を保つ。
 
