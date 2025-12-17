@@ -260,7 +260,7 @@ export const useCreateUser = () => {
 
   return useMutation({
     mutationFn: (input: CreateUserInput) => createUserUseCase.execute(input),
-    onSuccess: user => {
+    onSuccess: (user) => {
       queryClient.setQueryData(['user', user.id], user)
       queryClient.invalidateQueries({ queryKey: ['users'] })
     },
