@@ -2,6 +2,7 @@ import js from '@eslint/js'
 import tseslint from '@typescript-eslint/eslint-plugin'
 import parser from '@typescript-eslint/parser'
 import prettier from 'eslint-plugin-prettier'
+import globals from 'globals'
 
 export default [
   {
@@ -13,6 +14,7 @@ export default [
       'pnpm-lock.yaml',
       'postcss.config.js',
       'tailwind.config.ts',
+      '.history/**',
     ],
   },
   js.configs.recommended,
@@ -23,6 +25,8 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
+        ...globals.browser,
+        ...globals.node,
         React: 'readonly',
         JSX: 'readonly',
       },
