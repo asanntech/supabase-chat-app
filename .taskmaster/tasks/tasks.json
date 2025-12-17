@@ -133,10 +133,11 @@
             "dependencies": [
               2
             ],
-            "details": "1. Create migration: npx supabase migration new create_avatars_bucket\n2. Edit migration file with SQL:\n   - INSERT INTO storage.buckets: id='avatars', name='avatars', public=true\n   - Create SELECT policy on storage.objects: public access for bucket_id='avatars'\n   - Create INSERT policy: authenticated users can upload to avatars/{auth.uid()}/*\n   - Create UPDATE policy: users can update files in their own folder (storage.foldername(name))[1] = auth.uid()::text\n   - Create DELETE policy: users can delete files in their own folder\n3. Apply migration: npx supabase migration up\n\nExpected outcome: avatars bucket visible in Studio Storage, policies enforce folder-based access control per user",
-            "status": "pending",
+            "details": "1. Create migration: npx supabase migration new create_avatars_bucket\n2. Edit migration file with SQL:\n   - INSERT INTO storage.buckets: id='avatars', name='avatars', public=true\n   - Create SELECT policy on storage.objects: public access for bucket_id='avatars'\n   - Create INSERT policy: authenticated users can upload to avatars/{auth.uid()}/*\n   - Create UPDATE policy: users can update files in their own folder (storage.foldername(name))[1] = auth.uid()::text\n   - Create DELETE policy: users can delete files in their own folder\n3. Apply migration: npx supabase migration up\n\nExpected outcome: avatars bucket visible in Studio Storage, policies enforce folder-based access control per user\n<info added on 2025-12-17T15:25:56.552Z>\nI'll analyze the codebase to provide accurate implementation details for this subtask update.Based on the codebase analysis, here's the new text content that should be appended to the subtask's details:\n\nImplementation completed successfully. Migration file created at supabase/migrations/20251217152422_create_avatars_bucket.sql with the following SQL implementation:\n- INSERT INTO storage.buckets statement creates public avatars bucket (id='avatars', name='avatars', public=true)\n- Four storage policies created on storage.objects table:\n  1. \"Avatar images are publicly accessible\" - SELECT policy for public read access (bucket_id='avatars')\n  2. \"Users can upload own avatar\" - INSERT policy for authenticated users, enforces folder structure avatars/{auth.uid()}/* using (storage.foldername(name))[1] = auth.uid()::text\n  3. \"Users can update own avatar\" - UPDATE policy for authenticated users to modify files in their own folder\n  4. \"Users can delete own avatar\" - DELETE policy for authenticated users to remove files in their own folder\nMigration successfully applied to local Supabase instance. Verified avatars bucket is visible in Supabase Studio at http://127.0.0.1:54323, and all four RLS policies are active and enforcing folder-based access control per user ID.\n</info added on 2025-12-17T15:25:56.552Z>",
+            "status": "done",
             "testStrategy": "In Studio Storage, verify avatars bucket exists and is public. Test upload to avatars/{user_id}/test.jpg should succeed for authenticated user, upload to avatars/{other_user_id}/ should fail.",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-17T15:25:13.340Z"
           },
           {
             "id": 5,
@@ -151,7 +152,7 @@
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2025-12-17T15:17:05.067Z"
+        "updatedAt": "2025-12-17T15:25:13.340Z"
       },
       {
         "id": 3,
@@ -446,13 +447,13 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-17T15:17:05.068Z",
+      "lastModified": "2025-12-17T15:25:13.341Z",
       "taskCount": 6,
       "completedCount": 1,
       "tags": [
         "master"
       ],
-      "created": "2025-12-17T15:17:16.477Z",
+      "created": "2025-12-17T15:25:22.514Z",
       "description": "Tasks for master context"
     }
   }
