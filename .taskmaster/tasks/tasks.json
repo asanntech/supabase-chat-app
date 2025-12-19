@@ -165,17 +165,18 @@
         "dependencies": [
           "2"
         ],
-        "status": "pending",
+        "status": "in-progress",
         "subtasks": [
           {
             "id": 1,
             "title": "Create Supabase client utilities for browser and server-side usage",
             "description": "Implement infrastructure layer Supabase client configurations for browser-side and server-side contexts using @supabase/ssr package with proper cookie handling.",
             "dependencies": [],
-            "details": "Create three files in src/infrastructure/supabase/:\n\n1. client.ts - Browser client for client components:\n   - Import createBrowserClient from @supabase/ssr\n   - Export createClient() function using NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY\n   - This client will be used in React client components\n\n2. server.ts - Server client for server components and API routes:\n   - Import createServerClient from @supabase/ssr\n   - Import cookies from next/headers\n   - Implement cookie handlers: get(name), set(name, value, options), remove(name, options)\n   - Export createClient() that uses cookieStore for session management\n   - This enables server-side authentication with proper cookie handling\n\n3. middleware.ts - Helper for Next.js middleware:\n   - Import createServerClient from @supabase/ssr\n   - Import NextResponse from next/server\n   - Export updateSession() function that refreshes auth session\n   - Handle request/response cookie manipulation for session persistence\n\nThese utilities form the foundation for all authentication operations across client and server contexts.",
-            "status": "pending",
+            "details": "Create three files in src/infrastructure/supabase/:\n\n1. client.ts - Browser client for client components:\n   - Import createBrowserClient from @supabase/ssr\n   - Export createClient() function using NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY\n   - This client will be used in React client components\n\n2. server.ts - Server client for server components and API routes:\n   - Import createServerClient from @supabase/ssr\n   - Import cookies from next/headers\n   - Implement cookie handlers: get(name), set(name, value, options), remove(name, options)\n   - Export createClient() that uses cookieStore for session management\n   - This enables server-side authentication with proper cookie handling\n\n3. middleware.ts - Helper for Next.js middleware:\n   - Import createServerClient from @supabase/ssr\n   - Import NextResponse from next/server\n   - Export updateSession() function that refreshes auth session\n   - Handle request/response cookie manipulation for session persistence\n\nThese utilities form the foundation for all authentication operations across client and server contexts.\n<info added on 2025-12-19T00:44:48.947Z>\nBased on the user request confirming the completion of subtask 3.1, here's the update that should be appended:\n\nImplementation completed successfully. All three Supabase client utilities have been created in src/infrastructure/supabase/:\n\n- client.ts: Browser client using createBrowserClient from @supabase/ssr with NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY environment variables\n- server.ts: Server client using createServerClient with Next.js cookies() integration for session management via cookie handlers (get, set, remove)\n- middleware.ts: Next.js middleware helper with updateSession() function for auth session refresh and cookie persistence\n\nTypeScript type checking and ESLint validation both passed without errors. The infrastructure foundation is now ready for authentication operations across client and server contexts.\n</info added on 2025-12-19T00:44:48.947Z>",
+            "status": "done",
             "testStrategy": "Verify by:\n1. Creating a test client component that calls createClient() from infrastructure/supabase/client.ts\n2. Creating a test server component that calls createClient() from infrastructure/supabase/server.ts\n3. Running TypeScript type check: pnpm tsc --noEmit\n4. Confirming environment variables are properly typed and accessed\n5. Testing that both clients can be instantiated without errors",
-            "parentId": "undefined"
+            "parentId": "undefined",
+            "updatedAt": "2025-12-19T00:44:25.083Z"
           },
           {
             "id": 2,
@@ -225,7 +226,8 @@
             "testStrategy": "End-to-end authentication flow testing:\n1. Start from /login, click Google sign-in\n2. Complete Google OAuth flow\n3. Verify redirect to /auth/callback\n4. Verify callback exchanges code for session\n5. Verify redirect to /chat with active session\n6. Refresh page and confirm session persists\n7. Test middleware: access protected route when logged out → redirect to /login\n8. Test logout: click logout button → session cleared → redirect to /login\n9. Verify cookies are set correctly (sb-access-token, sb-refresh-token)\n10. Test error handling: invalid OAuth code → error page\n11. Verify profile auto-creation trigger runs after first login\n12. Check middleware performance (should not slow down requests significantly)",
             "parentId": "undefined"
           }
-        ]
+        ],
+        "updatedAt": "2025-12-19T00:44:25.083Z"
       },
       {
         "id": 4,
@@ -448,13 +450,13 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-12-17T15:37:02.352Z",
+      "lastModified": "2025-12-19T00:44:25.083Z",
       "taskCount": 6,
       "completedCount": 2,
       "tags": [
         "master"
       ],
-      "created": "2025-12-17T15:37:11.033Z",
+      "created": "2025-12-19T00:44:31.003Z",
       "description": "Tasks for master context"
     }
   }
